@@ -9,16 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Componets\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="MessagingToolkit" Version="1.8.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+    <PackageReference Include="QRCoder" Version="1.6.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.8" />
   </ItemGroup>
 
 </Project>

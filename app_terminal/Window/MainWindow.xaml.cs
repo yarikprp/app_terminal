@@ -1,4 +1,5 @@
 ﻿using app_terminal.Model;
+using app_terminal.Windows;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,10 +56,11 @@ namespace app_terminal
                 }
 
                 int? selectedTicketTypeId = null;
+                string ticketTypeName = null;
 
                 if (ComboBoxTicketType.SelectedItem is ComboBoxItem selectedItem)
                 {
-                    string ticketTypeName = selectedItem.Content.ToString();
+                    ticketTypeName = selectedItem.Content.ToString();
                     selectedTicketTypeId = _context.TicketTypes
                                                     .FirstOrDefault(tt => tt.TicketType1 == ticketTypeName)?
                                                     .IdTicketType;
@@ -81,6 +83,17 @@ namespace app_terminal
                 _context.SaveChanges();
 
                 MessageBox.Show("Билет успешно приобретен!");
+
+                string ticketInfo = $"Тур: {selectedTour}, " + 
+                                    $"Тип: {ticketTypeName}, " +  
+                                    $"Имя: {TextBoxName.Text}, " +
+                                    $"Фамилия: {TextBoxSurname.Text}, " +
+                                    $"Отчество: {TextBoxPatronymic.Text}, " +
+                                    $"Страна: {TextBoxCountry.Text}, " +
+                                    $"Почта: {TextBoxEmail.Text}";
+
+                TicketWindow ticketWindow = new TicketWindow(ticketInfo);
+                ticketWindow.Show();
             }
             else
             {
@@ -105,11 +118,6 @@ namespace app_terminal
         {
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, emailPattern);
-        }
-
-        private string GenerateQRCode(string ticketNumber)
-        {
-            return $"QRCode_{ticketNumber}";
         }
     }
 }
