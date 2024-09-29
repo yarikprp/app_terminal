@@ -84,21 +84,28 @@ namespace app_terminal
 
                 MessageBox.Show("Билет успешно приобретен!");
 
-                string ticketInfo = $"Тур: {selectedTour}, " + 
-                                    $"Тип: {ticketTypeName}, " +  
-                                    $"Имя: {TextBoxName.Text}, " +
-                                    $"Фамилия: {TextBoxSurname.Text}, " +
-                                    $"Отчество: {TextBoxPatronymic.Text}, " +
-                                    $"Страна: {TextBoxCountry.Text}, " +
-                                    $"Почта: {TextBoxEmail.Text}";
+                ShowTicketWindow(selectedTour, ticketTypeName);
 
-                TicketWindow ticketWindow = new TicketWindow(ticketInfo);
-                ticketWindow.Show();
+                ClearInputFields();
             }
             else
             {
                 MessageBox.Show("Введите все данные!");
             }
+        }
+
+        private void ShowTicketWindow(Tour selectedTour, string ticketTypeName)
+        {
+            string ticketInfo = $"Тур: {selectedTour}, " +
+                                $"Тип: {ticketTypeName}, " +
+                                $"Имя: {TextBoxName.Text}, " +
+                                $"Фамилия: {TextBoxSurname.Text}, " +
+                                $"Отчество: {TextBoxPatronymic.Text}, " +
+                                $"Страна: {TextBoxCountry.Text}, " +
+                                $"Почта: {TextBoxEmail.Text}";
+
+            TicketWindow ticketWindow = new TicketWindow(ticketInfo);
+            ticketWindow.Show();
         }
 
         private void TextBoxEmail_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -118,6 +125,16 @@ namespace app_terminal
         {
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, emailPattern);
+        }
+
+        private void ClearInputFields()
+        {
+            TextBoxName.Text = string.Empty;
+            TextBoxSurname.Text = string.Empty;
+            TextBoxPatronymic.Text = string.Empty;
+            TextBoxCountry.Text = string.Empty;
+            TextBoxEmail.Text = string.Empty;
+            ComboBoxTicketType.SelectedItem = null;
         }
     }
 }
