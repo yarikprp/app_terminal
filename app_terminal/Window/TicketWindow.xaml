@@ -1,24 +1,75 @@
 ﻿<Window x:Class="app_terminal.Windows.TicketWindow"  
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
-        Title="Ваш билет" Height="420" Width="400" MinHeight="300" MinWidth="300">
-    <Grid Background="#F0F0F0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="31*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="67,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2">
-            <TextBlock FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Text="Информация о билете"  
-                       HorizontalAlignment="Center"/>
+        Title="Ваш билет" Height="Auto" Width="Auto" MinHeight="300" MinWidth="400"  
+        WindowStartupLocation="CenterScreen"   
+        Background="#FFFFFF">
+    <Grid Background="#F0F0F0" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <TextBlock FontSize="18" Text="{Binding TicketInfo}" TextAlignment="Center"   
-                       Margin="0,0,0,10"/>
+        <TextBlock FontSize="24" FontWeight="Bold" Margin="0,0,0,10"   
+                   Text="Информация о билете"  
+                   HorizontalAlignment="Center"  
+                   Foreground="#333333"   
+                   Grid.Row="0" />
 
-            <TextBlock FontSize="18" Text="QR Код:" Margin="0,20,0,10" HorizontalAlignment="Center"/>
-            <Image x:Name="ImageQRCode" Width="200" Height="200" HorizontalAlignment="Center"/>
+        <TextBlock FontSize="18"   
+                   Text="{Binding TicketInfo}"   
+                   TextAlignment="Center"   
+                   Margin="0,0,0,10"  
+                   Foreground="#555555"   
+                   Grid.Row="1"/>
 
-            <Button x:Name="PrintButton" Content="Распечатать" Width="100" Height="30" Margin="0,20,0,0"   
-                    HorizontalAlignment="Center" Click="PrintButton_Click"/>
-        </StackPanel>
+        <TextBlock FontSize="18" Text="QR Код:" Margin="0,20,0,10"   
+                   HorizontalAlignment="Center"   
+                   Foreground="#333333"   
+                   Grid.Row="2"/>
+
+        <Border BorderBrush="#CCCCCC"   
+                BorderThickness="1"   
+                CornerRadius="10"  
+                Background="#FFFFFF"  
+                Padding="10"  
+                Grid.Row="3"  
+                VerticalAlignment="Center"  
+                HorizontalAlignment="Center">
+            <Image x:Name="ImageQRCode"   
+                   Width="200"   
+                   Height="200"   
+                   Stretch="Uniform"   
+                   ToolTip="QR Код вашего билета"/>
+        </Border>
+
+        <Border Background="#4CAF50"   
+                Margin="0,20,0,0"  
+                Grid.Row="4">
+            <Button x:Name="PrintButton"   
+                    Background="#4CAF50" 
+                    Content="Распечатать"   
+                    Height="40"   
+                    Click="PrintButton_Click"  
+                    Foreground="#FFFFFF"   
+                    FontSize="16"   
+                    FontWeight="Bold"  
+                    BorderBrush="Transparent"  
+                    Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Border>
     </Grid>
 </Window>
